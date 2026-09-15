@@ -34,7 +34,17 @@ DevDNA allows users to upload a GitHub repository as a ZIP file, automatically s
 
 ## Screenshots
 
-> Screenshots coming soon.
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Repository DNA Report
+
+![Repository Report](screenshots/report.png)
+
+### Ask Repository
+
+![Search](screenshots/search.png)
 
 ## Run Locally
 
