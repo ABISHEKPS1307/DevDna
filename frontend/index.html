@@ -1,67 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevDNA</title>
-
-<style>
-
-body{
-background:#071126;
-color:white;
-font-family:Segoe UI,sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-}
-
-.container{
-text-align:center;
-}
-
-h1{
-font-size:72px;
-color:#3b82f6;
-margin-bottom:15px;
-}
-
-p{
-font-size:22px;
-color:#cbd5e1;
-}
-
-.badge{
-display:inline-block;
-margin-top:30px;
-padding:12px 24px;
-background:#1d4ed8;
-border-radius:30px;
-font-weight:bold;
-}
-
-</style>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DevDNA – AI Codebase Knowledge Assistant</title>
+<link rel="stylesheet" href="/static/styles.css" />
 </head>
-
 <body>
+<main class="container">
+  <header class="hero">
+    <div class="logo">🧬 Dev<span class="accent">DNA</span></div>
+    <p class="subtitle">Upload a repository ZIP and ask questions about the code —
+      local chunking, vector search and instant answers.</p>
+  </header>
 
-<div class="container">
+  <section class="card" id="uploadCard">
+    <div class="dropzone" id="dropzone">
+      <div class="drop-icon">📦</div>
+      <h2>Drop your repository ZIP here</h2>
+      <p class="muted small">or</p>
+      <button class="btn" id="browseBtn" type="button">Choose a .zip file</button>
+      <input type="file" id="fileInput" accept=".zip" hidden />
+      <p class="muted small" style="margin-top:14px">
+        GitHub repo → Code → Download ZIP &nbsp;•&nbsp; Python, JS, TS, JSX, TSX, Java, HTML, CSS
+      </p>
+    </div>
+    <div class="progress-wrap hidden" id="progressWrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="muted small" id="progressLabel">Uploading…</p>
+    </div>
+    <p class="status hidden" id="uploadStatus"></p>
+  </section>
 
-<h1>DevDNA</h1>
+  <button id="explorerToggle" class="explorer-toggle hidden" type="button"
+          aria-expanded="false" aria-controls="explorer">☰ Explorer</button>
 
-<p>AI-powered Codebase Knowledge Assistant</p>
+  <div class="workspace hidden" id="workspace">
+    <aside class="card explorer" id="explorer" aria-label="Repository files">
+      <div class="explorer-head">
+        <span class="explorer-title">EXPLORER</span>
+        <span class="explorer-repo" id="explorerRepo"></span>
+      </div>
+      <input id="treeFilter" class="tree-filter" type="text"
+             placeholder="Filter files…" autocomplete="off" />
+      <nav id="fileTree" class="file-tree"></nav>
+    </aside>
 
-<div class="badge">
+    <div class="content-col">
+      <section class="card" id="reportCard"></section>
 
-Version 0.1
+      <section class="card" id="askCard">
+        <div class="ask-head">
+          <h2>🔎 Ask Repository</h2>
+          <div class="mode-toggle" role="group" aria-label="Answer mode">
+            <button type="button" class="mode-btn active" data-mode="local">Local Search</button>
+            <button type="button" class="mode-btn" data-mode="ai" id="aiModeBtn">AI RAG</button>
+          </div>
+        </div>
+        <form id="askForm" class="ask-row">
+          <input id="questionInput" type="text" placeholder="Ask about your repository..."
+                 autocomplete="off" />
+          <button class="btn" id="askBtn" type="submit">Ask</button>
+        </form>
+        <div class="answer-box hidden" id="answerBox">
+          <p class="answer-label">Answer <span class="mode-badge" id="modeBadge">Local Search</span></p>
+          <p id="answerText"></p>
+          <p class="notice hidden" id="answerNotice"></p>
+        </div>
+        <div class="hidden" id="codeSection">
+          <h3>Supporting Code</h3>
+          <div id="primaryCode"></div>
+          <div class="hidden" id="moreWrap">
+            <h3>More Related Code</h3>
+            <div id="moreCode"></div>
+          </div>
+        </div>
+        <p class="status hidden" id="askStatus"></p>
+      </section>
 
-</div>
+      <section class="card hidden" id="previewCard">
+        <div class="preview-head">
+          <span class="file-chip" id="previewPath"></span>
+          <span class="chip" id="previewLang"></span>
+          <button class="icon-btn" id="previewClose" type="button" aria-label="Close preview">✕</button>
+        </div>
+        <div id="previewBody"></div>
+      </section>
+    </div>
+  </div>
 
-</div>
-
+  <footer class="footer muted small">DevDNA — your codebase, decoded. Runs 100% locally.</footer>
+</main>
+<script src="/static/app.js" defer></script>
 </body>
 </html>
