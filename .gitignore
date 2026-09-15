@@ -13,3 +13,5 @@ repositories/
 # OS files
 .DS_Store
 Thumbs.db
+
+demo/*.mp4
