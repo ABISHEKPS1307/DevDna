@@ -3,8 +3,8 @@
 AI-powered Codebase Knowledge Assistant built with FastAPI.
 ## 🎥 Live Demo
 
-https://github.com/ABISHEKPS1307/DevDNA/assets/...
-
+[https://github.com/ABISHEKPS1307/DevDNA/assets/...
+](https://github.com/user-attachments/assets/12345678-abcd-efgh-ijkl-123456789abc)
 ## Overview
 
 DevDNA allows users to upload a GitHub repository as a ZIP file, automatically scan the codebase, build a local vector index, and ask natural language questions about the project.
